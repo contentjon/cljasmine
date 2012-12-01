@@ -6,7 +6,7 @@
 (defn format-error [res]
   (cond
    (sequential? res) (->> res
-                          (map pr-str)
+                          (map print-str)
                           (str/join " "))
    (keyword? res)    (name res)
    :else             (str res)))
