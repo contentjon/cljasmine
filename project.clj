@@ -1,5 +1,5 @@
 (defproject cljasmine "0.1.0-SNAPSHOT"
-  :description "A tiny ClojureScript wrapper for the Jasmine testing framework"
+  :description "A ClojureScript BDD testing framework"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :plugins [[lein-cljsbuild "0.2.9"]]
