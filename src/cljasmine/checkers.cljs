@@ -36,6 +36,11 @@
     ["Actual result:" result
      "is not equal to expected value:" expected]))
 
+(j/defchecker :not= [result expected]
+  (when (= result expected)
+    ["Actual result:" result
+     "is equal to expected value:" expected]))
+
 (j/defchecker :< [result expected]
   (when-not (< result expected)
     ["Actual result:" result
