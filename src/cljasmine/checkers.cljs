@@ -61,9 +61,24 @@
     ["Actual result:" result
      "is not greater or equal then expected value:" expected]))
 
+(j/defchecker :to-be-roughly [result expected & {:keys [e] :or {e 0.0001}}]
+  (let [roughly? #(>= e (js/Math.abs (- %1 %2)))]
+    (when-not
+        (cond
+          (seqable? result) (reduce #(and %1 %2) (map roughly? (seq result) (seq expected)))
+          :else             (roughly? result expected))
+      ["Actual result:" result
+       "is not roughly equal to expected value:" expected
+       "with a margin of error of:" e])))
+
 (j/defchecker :contains [result sub-coll]
   (when-not (-> (data/diff result sub-coll)
                 (second)
                 (nil?))
     ["Actual result:" result
      "does not contain sub-collection" sub-coll]))
+
+(j/defchecker :to-satisfy [result expected-fn]
+  (when-not (expected-fn result)
+    ["Actual result:" result
+     "does not satisfy predicate:" (:name (meta expected-fn))]))
