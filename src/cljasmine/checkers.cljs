@@ -16,10 +16,10 @@
     (js/beforeEach
      (fn []
        (this-as it-context
-         (let [matcher (fn [expected]
+         (let [matcher (fn [expected & rest]
                          (this-as match-context
                            (let [actual (.-actual match-context)
-                                 res    (checker actual expected)
+                                 res    (apply checker actual expected rest)
                                  ok?    (nil? res)]
                              (when-not ok?
                                (set! (.-message match-context)

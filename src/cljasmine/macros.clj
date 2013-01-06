@@ -32,12 +32,12 @@
           (cons fst#)
           (clojure.string/join))))
 
-(defmacro expect [result checker-key expected]
+(defmacro expect [result checker-key expected & rest]
   (let [checker (-> checker-key
                     (format-js-sym)
                     (symbol))]
     `(. (~'js/expect ~result)
-        (~checker ~expected))))
+        (~checker ~expected ~@rest))))
 
 (defmacro defchecker [key args & body]
   `(cljasmine.checkers/add-checker
