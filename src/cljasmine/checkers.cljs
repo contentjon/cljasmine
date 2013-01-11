@@ -67,6 +67,35 @@
     ["Actual result:" result
      "is not greater or equal then expected value:" expected]))
 
+(j/defchecker :truthy [result]
+  (when-not result
+    ["Actual result:" result
+     "is not truthy"]) )
+
+(j/defchecker :falsey [result]
+  (when result
+    ["Actual result:" result
+     "is not falsey"]))
+
+(j/defchecker :nil [result]
+  (when-not (nil? result)
+    ["Actual result:" result
+     "is not nil"]))
+
+(j/defchecker :not-nil [result]
+  (when (nil? result)
+    ["Actual result is nil"]))
+
+(j/defchecker :empty [result]
+  (when-not (empty? result)
+    ["Actual result:" result
+     "is not empty"]))
+
+(j/defchecker :not-empty [result]
+  (when (empty? result)
+    ["Actual result:" result
+     "is empty"]))
+
 (j/defchecker :to-be-roughly [result expected & {:keys [e] :or {e 0.0001}}]
   (when-not (roughly? result expected e)
     ["Actual result:" result
