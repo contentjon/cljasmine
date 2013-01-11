@@ -39,6 +39,9 @@
     `(. (~'js/expect ~result)
         (~checker ~@expected))))
 
+(defmacro is [& args]
+  `(expect ~@args))
+
 (defmacro defchecker [key args & body]
   `(cljasmine.checkers/add-checker
     ~key
