@@ -47,3 +47,18 @@
     ~key
     (fn ~args
       ~@body)))
+
+(defmacro waits-for [doc timeout _ f _ expectations]
+  `(let [state# (atom nil)]
+     (js/runs
+       (fn []
+         (~f (fn [err# res#]
+               (if err#
+                 (throw err#)
+                 (reset! state# res#))))))
+     (js/waitsFor
+       (fn []
+         (boolean @state#)))
+     (js/runs
+       (fn []
+         (~expectations @state#)))))
