@@ -1,7 +1,7 @@
 # cljasmine
 
 A ClojureScript BDD testing framework based on
-[Jasmine](http://pivotal.github.com/jasmine/) that displays your test
+[Jasmine](https://jasmine.github.io/) that displays your test
 results in a browser page and comes with auto-refresh.
 
 ## Syntax
